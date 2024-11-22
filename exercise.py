@@ -166,19 +166,24 @@ def determine_season():
    month = input("Enter the month of the year (Jan - Dec): ").upper()
    day = int(input("Enter the day of the month:"))
 
-   if month not in ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']:
-        print("Invalid month. Please input a valid month (Jan - Dec)")
-        return
-   if day < 1 or day > 31:
-        print("Invalid day. Please input a valid day (1-31)")
-        return
-
-
-   if (month == 'DEC' and day >= 21) or (month == 'JAN' or month == 'FEB') or (month == 'MAR' and day <= 19) :  season = "Winter" 
+   days_in_month = {
+        "JAN": 31, "FEB": 29, "MAR": 31, "APR": 30, "MAY": 31, "JUN": 30,
+        "JUL": 31, "AUG": 31, "SEP": 30, "OCT": 31, "NOV": 30, "DEC": 31
+    }
    
-   elif (month == 'MAR' and day >= 20) or (month == 'APR' or month == 'MAY') or (month == 'JUN' and day <= 20): season = "Spring"
+   if month not in days_in_month:
+        print("Invalid month input. Please enter a valid three-letter month e.g., Jan, Feb.")
+        return
+   
+   if day > days_in_month[month]:
+        print(f"Invalid date. {month} has only {days_in_month[month]} days.")
+        return
 
-   elif (month == 'JUN' and day >= 21) or (month == 'JUL' or month == 'AUG') or (month == 'SEP' and day <= 21): season = "Summer"
+   if (month == 'DEC' and day >= 21) or (month == 'JAN' or 'FEB') or (month == 'MAR' and day <= 19) :  season = "Winter" 
+   
+   elif (month == 'MAR' and day >= 20) or (month == 'APR' or 'MAY') or (month == 'JUN' and day <= 20): season = "Spring"
+
+   elif (month == 'JUN' and day >= 21) or (month == 'JUL' or 'AUG') or (month == 'SEP' and day <= 21): season = "Summer"
    
    else: season = "Fall"
    
